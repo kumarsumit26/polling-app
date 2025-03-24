@@ -1,0 +1,17 @@
+CREATE TABLE polls (
+    id SERIAL PRIMARY KEY,
+    question TEXT NOT NULL,
+    created_by VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    yes_count INT DEFAULT 0,
+    no_count INT DEFAULT 0
+);
+
+CREATE TABLE votes (
+    id SERIAL PRIMARY KEY,
+    poll_id INT NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    vote BOOLEAN NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (poll_id) REFERENCES polls(id)
+);
